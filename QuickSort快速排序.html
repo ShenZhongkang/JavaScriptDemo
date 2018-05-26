@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>快速排序</title>
+</head>
+<body>
+	<script>
+		// 快速排序，原理：取基准值，分左右，递归重复
+		function quickSort (arr){
+			// 如果传入的数组长度是0或1，则不需要排序，直接将数组返回即可
+			if(arr.length <= 1){
+				return arr;
+			}else{
+				// (1)取基准值，随便取
+				var pivot = arr.splice(0, 1);
+				// (2)分左右，声明俩数组，一个放小于基准值的数，一个放大于基准值的数
+				var leftArr = [];
+				var rightArr = [];
+				for(var i=0; i<arr.length; i++){
+					if(arr[i] < pivot){
+						leftArr.push(arr[i]);
+					}else{
+						rightArr.push(arr[i]);
+					}
+				}
+				// (3)将左数字，基准值，右数组合并为一个完整的数组，返回
+				return quickSort(leftArr).concat(pivot, quickSort(rightArr));
+			}
+		}
+
+		// console.log(quickSort([9, 8, 7, 6, 5, 4, 3, 2, 1]));
+	</script>
+</body>
+</html>

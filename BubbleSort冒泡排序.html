@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>冒泡排序</title>
+</head>
+<body>
+	<script>
+		// 冒泡排序，原理：双指针比较，用后面的和前面的一一比较，更换位置
+		function bubbleSort (arr){
+			for(var i=0; i<arr.length-1; i++){
+				for(var j=0; j<arr.length-1-i; j++){
+					if(arr[j] > arr[j+1]){
+						// 判断大小，更换位置，用第三个变量来替换
+						var temp = arr[j];
+						arr[j] = arr[j+1];
+						arr[j+1] = temp;
+					}
+				}
+			}
+			return arr;
+		}
+		// console.log(bubbleSort([1, 7, 5, 2, 9, 10, 34]));
+	</script>
+</body>
+</html>
