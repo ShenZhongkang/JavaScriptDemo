@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// Math对象的方法练习，返回随机字符串组成的指定长度的字符串
+		// getRandom 获取从最小值到最大值的一个随机数
+		function getRandom (min, max){
+			return Math.floor(Math.random()*(max-min)+min);
+		}
+		// getRandomString 获取characterDic中的length个随机字符
+		function getString (length){
+			var characterDic = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+			var str = "";
+			for(var i=0; i<length; ++i){
+				var randNum = getRandom(0, characterDic.length);
+				str += characterDic.substring(randNum, randNum+1);
+			}
+			return str;
+		}
+		// console.log(getString(4));
+	</script>
+</body>
+</html>
