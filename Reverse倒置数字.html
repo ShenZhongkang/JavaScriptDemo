@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Rev输出倒置数字</title>
+</head>
+<body>
+	<script>
+		// 编写一个函数rev用于将一个整数前后倒置，如rev(12345)返回54321
+		var n = parseInt(prompt("请输入一个数字", '123456'));
+		var result = 0;
+		while(n != 0){
+			result = result*10 + n%10;
+			n = parseInt(n/10);
+			// console.log(result);
+			// console.log(n);
+		}
+		alert(result);
+	</script>
+</body>
+</html>
