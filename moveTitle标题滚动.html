@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>滚动的----------title</title>
+</head>
+<body>
+	<script>
+		var timer = null;
+		timer = setInterval(function(){
+			var title = document.title;
+			var arr = title.split("");
+			arr.push(arr.shift());
+			document.title = arr.join("");
+		}, 300);
+	</script>
+</body>
+</html>
