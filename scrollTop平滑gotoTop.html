@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>平滑滚动gototop</title>
+	<style>
+		html,body {
+			height: 300%;
+			background-color: #333;
+		}
+		.gotop {
+			color: #333;
+			display: inline-block;
+			position: fixed;
+			right: 20px;
+			bottom: 20px;
+			width: 50px;
+			height: 50px;
+			line-height: 50px;
+			text-align: center;
+			background-color: #ff3;
+			cursor: pointer;
+			user-select: none;
+		}
+	</style>
+</head>
+<body>
+	<span class="gotop" onclick="scrollUp();">Top</span>
+	<!-- 
+	<script>
+		function scrollUp(){
+
+			// IE10+/Android Browser4.4+
+
+			// create requestAnimationFrame
+			var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame || function(clb){
+				return setTimeout(clb,1000/60);
+			};
+
+			// cancel requestAnimationFrame
+			var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame || window.webkitCancelAnimationFrame || window.msCancelAnimationFrame || function(id){
+				clearTimeout(id);
+			};
+
+			// get scrollTop
+			var top = document.body.scrollTop || document.documentElement.scrollTop;
+
+			// duration
+			var duration = 300; // 300ms
+
+			// calculate steps
+			var step = top / (duration / (1000 / 60)) >> 0; // 取整
+
+			// scroll function
+			function fn(){
+				if(top >= 0){
+					top -= step;
+					document.documentElement.scrollTop = document.body.scrollTop = top;
+					fn.rafTimer = requestAnimationFrame(fn);
+				}else{
+					document.body.scrollTop = 0;
+					cancelAnimationFrame(fn.rafTimer);
+				}
+			}
+			fn.rafTimer = requestAnimationFrame(fn);
+		}
+	</script>
+	-->
+	<script>
+		function scrollUp(){
+			var gotoTop = function(){
+				var currentPosition = document.documentElement.scrollTop || document.body.scrollTop;
+				currentPosition -= 20;
+				if(currentPosition > 0){
+					window.scrollTo(0, currentPosition);
+				}else{
+					window.scrollTo(0, 0);
+					clearInterval(timer);
+					timer = null;
+				}
+			}
+			var timer = setInterval(gotoTop, 1);
+		}
+	</script>
+</body>
+</html>
