@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>三级联动</title>
+	<style>
+       select{  width:200px;height:35px;  }
+	</style>
+</head>
+<body>
+	省：
+    <select class='sheng'>
+	   <option>请选择</option>
+	</select>
+	市：
+    <select class='shi'></select>
+    区：
+    <select class='qu'></select>
+    <script>
+    // 获取元素
+    var shengSelect = document.querySelector('.sheng');
+    var shiSelect = document.querySelector('.shi');
+    var quSelect = document.querySelector('.qu');
+    // 模拟后台发送的数据
+    var shengList = ['山西省','河南省','河北省'];
+    var shiList = [['临汾市','运城市','晋城','大同'],['郑州市','驻马店'],['石家庄','保定']];
+    var quList = [
+                    [['尧都区','侯马市','洪洞'],['盐湖区','绛县','万荣县'],['原曲','高平'],['朔州','忻州']],
+                    [['郑州1区','郑州2区'],['驻马店1区','驻马店2区']],
+                    [['石家庄1区','石家庄2区'],['保定1区','保定2区']]
+                  ]
+    // 定义变量 记录省List的下标
+    var shengIndex = 0;
+    // 页面一旦加载就遍历省list，往省Select里面放数据
+    for(var i = 0;i < shengList.length; i++){
+    	var shengOption = new Option(shengList[i]);
+    	shengSelect.options.add(shengOption);
+    }
+    // 当省Select的数据发生改变时，执行该事件
+    shengSelect.onchange = function (eve){
+    	// 得到当前选择的省的下标 减1是因为有一个请选择的选项
+    	shengIndex = eve.target.selectedIndex-1;
+    	// 如果用户选择到请选择的选项 则清空市Select和区Select的全部内容
+    	if(shengIndex == -1){
+    		shiSelect.options.length = 0;
+    		quSelect.options.length = 0;
+    	// 如果用户选择到除请选择项以外别的省
+    	}else{
+    		// 先清空市Select和区Select的全部内容  避免信息重叠显示
+    		shiSelect.options.length = 0;
+    		quSelect.options.length = 0;
+    		// 遍历选中的省对应的市的数组  往市Select里面放对应数据
+    		for(var j = 0; j < shiList[shengIndex].length; j++){
+    			var shiOption = new Option(shiList[shengIndex][j]);
+    	        shiSelect.options.add(shiOption);
+    		}
+    		// 同时遍历选中的省对应的市里面的第一个市  往区Select里面放对应数据
+            for(var m = 0; m < quList[shengIndex][0].length; m++){
+            	// quList[shengIndex][0][m] 的意思是选中省里面对应的第一个市里面的区，逐个添加数据
+            	var quOption = new Option(quList[shengIndex][0][m]);
+    	        quSelect.options.add(quOption);
+            }
+    	}
+    }
+    // 市Select发生改变时，也就是当用户手动改变市区时 执行该事件
+    shiSelect.onchange = function (eve){
+    	// 定义变量 记录市List的下标
+    	var shiIndex = eve.target.selectedIndex;
+    	// 清空区Select里面的内容  避免信息重叠显示
+    	quSelect.options.length = 0;
+    	// 遍历选中的省对应的市对应的区的数组  往区Select里面放对应数据
+    	for(var k = 0; k < quList[shengIndex][shiIndex].length;k++){
+    		// quList[shengIndex][shiIndex][k] 的意思是选中省里面对应的市对应的区，逐个添加数据
+    		var quOption = new Option(quList[shengIndex][shiIndex][k]);
+    	    quSelect.options.add(quOption);
+    	}
+    }
+
+
+
+
+
+    </script>
+</body>
+</html>
